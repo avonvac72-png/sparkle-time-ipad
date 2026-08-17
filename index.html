@@ -9,90 +9,97 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="theme-color" content="#fff6eb" />
   <link rel="apple-touch-icon" href="icon-180.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet" />
   <title>Sparkle Time</title>
   <style>
     :root {
       --paper: #fff6eb; --ink: #3d2c2a; --muted: #8a6f68; --surface: #fffdf9;
       --line: #ead6c4; --coral: #e85d4c; --peach: #ffb48a; --sun: #f0c14b;
-      --leaf: #5eae6d; --sky: #4fb7c8; --rose: #e8899a; --plum: #8d6bb3;
-      --red: #e85d4c; --orange: #ef8a3c; --yellow: #f0c14b; --green: #5eae6d;
-      --blue: #4a9fe0; --white: #fffdf9; --black: #2b211f;
+      --leaf: #5eae6d; --sky: #4fb7c8; --rose: #e8899a;
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { margin: 0; min-height: 100%; background: var(--paper); color: var(--ink);
-      font-family: Nunito, ui-rounded, "Segoe UI", system-ui, sans-serif; }
+      font-family: Fredoka, ui-rounded, "Segoe UI", system-serif, sans-serif; }
     button { cursor: pointer; font: inherit; color: inherit; }
     header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center;
-      justify-content: space-between; gap: 12px; padding: max(12px, env(safe-area-inset-top)) 16px 12px;
-      background: rgba(255,246,235,.92); border-bottom: 1px solid var(--line); }
-    .brand { display: flex; align-items: center; gap: 8px; }
-    .brand img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-    .brand b { display: block; font-size: 14px; }
-    .brand span { font-size: 12px; color: var(--muted); font-weight: 700; }
-    .chip { display: flex; align-items: center; gap: 6px; background: var(--surface);
-      border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; font-weight: 800; }
-    .icon-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
-      background: var(--surface); }
-    main { padding: 20px 16px 40px; max-width: 900px; margin: 0 auto; }
-    .hero { width: 100%; height: 180px; object-fit: cover; border-radius: 28px; display: block; }
-    h1 { text-align: center; font-size: 28px; margin: 20px 0 4px; }
-    .sub { text-align: center; color: var(--muted); font-weight: 700; margin: 0 0 20px; }
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    @media (min-width: 700px) { .grid { grid-template-columns: repeat(4, 1fr); } .hero { height: 220px; } }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
-      overflow: hidden; padding: 0; text-align: left; }
+      justify-content: space-between; gap: 12px;
+      padding: max(12px, env(safe-area-inset-top)) 16px 12px;
+      background: rgba(255,246,235,.94); }
+    .brand { display: flex; align-items: center; gap: 10px; border: 0; background: none; padding: 0; }
+    .brand img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 0 #ead6c4; }
+    .brand b { display: block; font-size: 20px; }
+    .brand span { font-size: 14px; color: var(--muted); font-weight: 600; }
+    .chip { display: flex; align-items: center; gap: 6px; background: var(--sun);
+      border: 0; border-radius: 999px; padding: 10px 16px; font-weight: 700; font-size: 20px;
+      box-shadow: 0 4px 0 #d4a62e; }
+    .home-btn { width: 64px; height: 64px; border-radius: 50%; border: 0; background: var(--sky);
+      color: #fff; font-size: 28px; box-shadow: 0 4px 0 #3a96a6; }
+    main { padding: 8px 16px 36px; max-width: 920px; margin: 0 auto; }
+    .hero { width: 100%; height: 168px; object-fit: cover; border-radius: 28px; display: block;
+      box-shadow: 0 8px 0 rgba(61,44,42,.08); }
+    h1 { text-align: center; font-size: 32px; margin: 18px 0 18px; letter-spacing: -0.03em; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    @media (min-width: 740px) { .grid { grid-template-columns: repeat(4, 1fr); } .hero { height: 220px; } }
+    .card { background: var(--surface); border: 0; border-radius: 24px; overflow: hidden;
+      padding: 0; text-align: center; box-shadow: 0 6px 0 #ead6c4; }
+    .card:active { transform: translateY(4px); box-shadow: 0 2px 0 #ead6c4; }
     .card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .card div { padding: 10px 12px; }
-    .card b { display: block; }
-    .card small { color: var(--muted); font-weight: 700; }
+    .card b { display: block; padding: 10px 8px 12px; font-size: 20px; }
     .hidden { display: none !important; }
-    .palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 520px; margin: 0 auto; }
-    .swatch { aspect-ratio: 1; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 8px 20px rgba(61,44,42,.12); }
-    .nums { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-width: 640px; margin: 0 auto; }
-    .num { aspect-ratio: 1; border: 1px solid var(--line); background: var(--surface); border-radius: 18px; font-weight: 900; font-size: 26px; }
-    .letters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
-    .letter { aspect-ratio: 1; background: var(--sky); color: #fff; border: 0; border-radius: 14px; font-weight: 900; }
-    .animals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .animal { min-height: 88px; border: 0; border-radius: 18px; font-weight: 800; }
-    .shapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .shape { min-height: 110px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; font-weight: 800; }
-    .match { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 520px; margin: 0 auto; }
-    .mcard { aspect-ratio: 1; border: 0; border-radius: 16px; background: var(--coral); color: #fff; font-size: 22px; font-weight: 900; }
-    .mcard.on { background: var(--surface); color: var(--ink); border: 2px solid var(--sky); }
-    .xylo { display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 220px; }
-    .bar { flex: 1; max-width: 56px; border: 0; border-radius: 12px 12px 6px 6px; }
-    .crayons { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 10px; }
-    .crayon { width: 40px; height: 40px; border-radius: 50%; border: 4px solid #fff; }
-    .crayon.on { border-color: var(--ink); }
-    canvas { width: 100%; height: 280px; background: #fff; border-radius: 20px; border: 1px solid var(--line); touch-action: none; }
-    .row { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
-    .btn { background: var(--ink); color: var(--paper); border: 0; border-radius: 14px; padding: 10px 16px; font-weight: 800; }
-    .btn.ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+    .palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 560px; margin: 0 auto; }
+    .swatch { aspect-ratio: 1; border-radius: 50%; border: 6px solid #fff; box-shadow: 0 8px 0 rgba(61,44,42,.12); }
+    .swatch:active { transform: scale(.92); }
+    .nums { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; max-width: 680px; margin: 0 auto; }
+    .num { aspect-ratio: 1; border: 0; background: var(--surface); border-radius: 22px; font-weight: 700; font-size: 32px; box-shadow: 0 5px 0 #ead6c4; }
+    .num:active { transform: translateY(3px); box-shadow: 0 2px 0 #ead6c4; }
+    .letters { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .letter { aspect-ratio: 1; background: var(--sky); color: #fff; border: 0; border-radius: 18px; font-weight: 700; font-size: 26px; box-shadow: 0 5px 0 #3a96a6; }
+    .animals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .animal { min-height: 104px; border: 0; border-radius: 22px; font-weight: 700; font-size: 20px; box-shadow: 0 5px 0 rgba(61,44,42,.12); }
+    .shapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .shape { min-height: 130px; background: var(--surface); border: 0; border-radius: 22px; font-weight: 700; font-size: 22px; box-shadow: 0 5px 0 #ead6c4; }
+    .match { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 560px; margin: 0 auto; }
+    .mcard { aspect-ratio: 1; border: 0; border-radius: 20px; background: var(--coral); color: #fff; font-size: 30px; font-weight: 700; box-shadow: 0 5px 0 #c44738; }
+    .mcard.on { background: var(--surface); color: var(--ink); box-shadow: 0 5px 0 var(--sky); }
+    .xylo { display: flex; align-items: flex-end; justify-content: center; gap: 8px; height: 260px; }
+    .bar { flex: 1; max-width: 64px; border: 0; border-radius: 16px 16px 8px 8px; box-shadow: 0 6px 0 rgba(61,44,42,.15); }
+    .crayons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 12px; }
+    .crayon { width: 52px; height: 52px; border-radius: 50%; border: 5px solid #fff; box-shadow: 0 4px 0 rgba(61,44,42,.12); }
+    .crayon.on { outline: 4px solid var(--ink); }
+    canvas { width: 100%; height: 300px; background: #fff; border-radius: 24px; touch-action: none; box-shadow: 0 6px 0 #ead6c4; }
+    .row { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
+    .btn { background: var(--ink); color: var(--paper); border: 0; border-radius: 18px; padding: 14px 22px; font-weight: 700; font-size: 18px; }
+    .btn.ghost { background: var(--surface); color: var(--ink); box-shadow: 0 4px 0 #ead6c4; }
     .sheet { position: fixed; inset: 0; background: rgba(61,44,42,.4); display: flex; align-items: flex-end; justify-content: center; padding: 16px; z-index: 20; }
-    .panel { background: var(--surface); border-radius: 28px; padding: 22px; width: 100%; max-width: 420px; max-height: 90dvh; overflow: auto; }
-    input[type=text] { width: 100%; padding: 10px; border-radius: 12px; border: 1px solid var(--line); font: inherit; font-weight: 700; margin-top: 6px; }
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper);
-      padding: 10px 18px; border-radius: 999px; font-weight: 800; opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .panel { background: var(--surface); border-radius: 28px; padding: 22px; width: 100%; max-width: 420px; }
+    input[type=text] { width: 100%; padding: 12px; border-radius: 14px; border: 2px solid var(--line); font: inherit; font-weight: 600; margin-top: 6px; }
+    .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: var(--leaf); color: #fff;
+      padding: 14px 22px; border-radius: 999px; font-weight: 700; font-size: 20px; opacity: 0; pointer-events: none; transition: opacity .2s; }
     .toast.show { opacity: 1; }
+    .pop { animation: pop .28s ease; }
+    @keyframes pop { 50% { transform: scale(1.12); } }
+    .yay { position: fixed; inset: 0; pointer-events: none; z-index: 30; overflow: hidden; }
+    .yay i { position: absolute; top: -12px; width: 12px; height: 12px; border-radius: 3px; animation: fall 1.2s linear forwards; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(220deg); opacity: .2; } }
+    @media (prefers-reduced-motion: reduce) { .pop, .yay i, .card:active, .num:active { animation: none; transform: none; } }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">
+    <button class="brand" id="mascotBtn" aria-label="Sparkle">
       <img src="art/mascot.jpg" alt="" />
-      <div><b>Sparkle Time</b><span id="hello">A little playroom</span></div>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center">
+      <div><b>Sparkle Time</b><span id="hello">Tap a picture!</span></div>
+    </button>
+    <div style="display:flex;gap:10px;align-items:center">
       <div class="chip">★ <span id="stars">0</span></div>
-      <button class="icon-btn" id="homeBtn" hidden aria-label="Home">⌂</button>
-      <button class="icon-btn" id="setBtn" aria-label="Settings">⚙</button>
+      <button class="home-btn" id="homeBtn" hidden aria-label="Home">⌂</button>
     </div>
   </header>
   <main>
     <section id="home">
       <img class="hero" src="art/hero.jpg" alt="" />
-      <h1>Tap a picture to play</h1>
-      <p class="sub">Colors, letters, animals, drawing, and more</p>
+      <h1>Tap a picture!</h1>
       <div class="grid" id="menu"></div>
     </section>
     <section id="play" class="hidden">
@@ -102,32 +109,29 @@
   </main>
   <div id="sheet" class="sheet hidden">
     <div class="panel">
-      <h2>Grown-up settings</h2>
-      <p class="sub" style="text-align:left">Works offline. Add to Home Screen from Safari.</p>
-      <label>Child’s name
-        <input id="nameIn" type="text" maxlength="24" placeholder="Optional" />
-      </label>
-      <label style="display:flex;justify-content:space-between;margin:14px 0;font-weight:800">
+      <h2>Grown-ups only</h2>
+      <label>Name<input id="nameIn" type="text" maxlength="18" placeholder="Optional" /></label>
+      <label style="display:flex;justify-content:space-between;margin:16px 0;font-weight:700">
         Friendly voice <input id="voiceIn" type="checkbox" checked />
       </label>
       <div class="row">
         <button class="btn ghost" id="resetBtn">Reset stars</button>
-        <button class="btn" id="closeSheet">Done</button>
+        <button class="btn" id="closeSheet">All done</button>
       </div>
-      <p class="sub" style="margin-top:16px;text-align:left">On iPad: open this file in Safari → Share → Add to Home Screen.</p>
     </div>
   </div>
   <div class="toast" id="toast"></div>
+  <div class="yay" id="yay"></div>
 <script>
 const ACT = [
-  ["colors","Colors","Tap a color","art/colors.jpg"],
-  ["numbers","Numbers","Count to ten","art/numbers.jpg"],
-  ["letters","Letters","Meet A to Z","art/letters.jpg"],
-  ["animals","Animals","Hear their sounds","art/animals.jpg"],
-  ["shapes","Shapes","Circles and stars","art/shapes.jpg"],
-  ["match","Match","Find the pairs","art/match.jpg"],
-  ["music","Music","Play the bars","art/music.jpg"],
-  ["draw","Draw","Make a picture","art/draw.jpg"],
+  ["colors","Colors","art/colors.jpg","Let's find colors!"],
+  ["numbers","Numbers","art/numbers.jpg","Let's count!"],
+  ["letters","Letters","art/letters.jpg","Let's say letters!"],
+  ["animals","Animals","art/animals.jpg","Hello, animals!"],
+  ["shapes","Shapes","art/shapes.jpg","Look at shapes!"],
+  ["match","Match","art/match.jpg","Find two the same!"],
+  ["music","Music","art/music.jpg","Make a song!"],
+  ["draw","Draw","art/draw.jpg","Let's draw!"],
 ];
 const COLORS = [["Red","#e85d4c"],["Orange","#ef8a3c"],["Yellow","#f0c14b"],["Green","#5eae6d"],["Blue","#4a9fe0"],["Purple","#8d6bb3"],["Pink","#e8899a"],["White","#fffdf9"]];
 const WORDS = {A:"Apple",B:"Ball",C:"Cat",D:"Dog",E:"Egg",F:"Fish",G:"Goat",H:"Hat",I:"Ice",J:"Jam",K:"Kite",L:"Lion",M:"Moon",N:"Nest",O:"Orange",P:"Pig",Q:"Queen",R:"Rain",S:"Sun",T:"Tree",U:"Up",V:"Van",W:"Water",X:"Box",Y:"Yarn",Z:"Zoo"};
@@ -137,20 +141,27 @@ const FACES = ["☀","☾","♥","✿","☁","★"];
 const NOTES = [262,294,330,349,392,440,494,523];
 const BARS = ["#e85d4c","#ef8a3c","#f0c14b","#5eae6d","#4fb7c8","#4a9fe0","#8d6bb3","#e8899a"];
 const CRAY = ["#e85d4c","#ef8a3c","#f0c14b","#5eae6d","#4fb7c8","#4a9fe0","#8d6bb3","#e8899a","#3d2c2a"];
+const YAY = ["Yay!","Good job!","You did it!","Wow!","Nice!"];
 
-const store = JSON.parse(localStorage.getItem("sparkle-offline") || '{"stars":0,"name":"","voice":true,"awarded":[]}');
-function save(){ localStorage.setItem("sparkle-offline", JSON.stringify(store)); }
-function toast(t){ const el=document.getElementById("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),1600); }
-function speak(t){ if(!store.voice || !window.speechSynthesis) return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.rate=.92; u.pitch=1.12; speechSynthesis.speak(u); }
-function award(k,n=1){ if(store.awarded.includes(k)) return; store.awarded.push(k); store.stars+=n; save(); document.getElementById("stars").textContent=store.stars; }
+const store = JSON.parse(localStorage.getItem("sparkle-kid") || '{"stars":0,"name":"","voice":true,"awarded":[]}');
+function save(){ localStorage.setItem("sparkle-kid", JSON.stringify(store)); }
+function toast(t){ const el=document.getElementById("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),1400); }
+function speak(t){ if(!store.voice || !window.speechSynthesis) return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.rate=.88; u.pitch=1.18; speechSynthesis.speak(u); }
+function award(k,n=1){ if(store.awarded.includes(k)) return; store.awarded.push(k); store.stars+=n; save(); document.getElementById("stars").textContent=store.stars; yay(); }
+function pop(el){ el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); }
+function yay(){
+  const box=document.getElementById("yay");
+  for(let i=0;i<18;i++){ const d=document.createElement("i"); d.style.left=Math.random()*100+"%"; d.style.background=["#e85d4c","#f0c14b","#5eae6d","#4fb7c8","#e8899a"][i%5]; d.style.animationDelay=(Math.random()*.2)+"s"; box.appendChild(d); setTimeout(()=>d.remove(),1300); }
+}
 let actx;
-function tone(f,d=.4){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==="suspended") actx.resume(); const o=actx.createOscillator(), g=actx.createGain(); o.frequency.value=f; o.type="sine"; g.gain.setValueAtTime(.28,actx.currentTime); g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+d); o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime+d);}catch(e){} }
-function hello(){ document.getElementById("hello").textContent = store.name ? ("Hi, "+store.name) : "A little playroom"; document.getElementById("stars").textContent=store.stars; }
+function tone(f,d=.35){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==="suspended") actx.resume(); const o=actx.createOscillator(), g=actx.createGain(); o.frequency.value=f; o.type="triangle"; g.gain.setValueAtTime(.22,actx.currentTime); g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+d); o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime+d);}catch(e){} }
+function hello(){ document.getElementById("hello").textContent = store.name ? ("Hi, "+store.name+"!") : "Tap a picture!"; document.getElementById("stars").textContent=store.stars; }
+function nice(){ return YAY[Math.floor(Math.random()*YAY.length)]; }
 
 const menu=document.getElementById("menu");
-ACT.forEach(([id,title,blurb,art])=>{
+ACT.forEach(([id,title,art])=>{
   const b=document.createElement("button"); b.className="card";
-  b.innerHTML=`<img src="${art}" alt=""><div><b>${title}</b><small>${blurb}</small></div>`;
+  b.innerHTML=`<img src="${art}" alt=""><b>${title}</b>`;
   b.onclick=()=>openPlay(id,title); menu.appendChild(b);
 });
 
@@ -158,39 +169,38 @@ function showHome(){
   document.getElementById("home").classList.remove("hidden");
   document.getElementById("play").classList.add("hidden");
   document.getElementById("homeBtn").hidden=true;
-  document.getElementById("setBtn").hidden=false;
+  speak("Home");
 }
 function openPlay(id,title){
   document.getElementById("home").classList.add("hidden");
   document.getElementById("play").classList.remove("hidden");
   document.getElementById("homeBtn").hidden=false;
-  document.getElementById("setBtn").hidden=true;
   document.getElementById("playTitle").textContent=title;
   const body=document.getElementById("playBody"); body.innerHTML="";
-  speak({colors:"Let's learn colors.",numbers:"Let's count.",letters:"Let's learn letters.",animals:"Meet the animals.",shapes:"Let's look at shapes.",match:"Find the matching pictures.",music:"Let's make music.",draw:"Time to draw."}[id]||"");
+  speak(ACT.find(a=>a[0]===id)[3]);
   builders[id](body);
 }
 
 const builders = {
   colors(el){
     el.className="palette";
-    COLORS.forEach(([n,c])=>{ const b=document.createElement("button"); b.className="swatch"; b.style.background=c; if(n==="White") b.style.borderColor="#3d2c2a44"; b.onclick=()=>{speak(n);tone(620,.12);award("c-"+n)}; el.appendChild(b); });
+    COLORS.forEach(([n,c])=>{ const b=document.createElement("button"); b.className="swatch"; b.style.background=c; if(n==="White") b.style.boxShadow="0 8px 0 #d8c4b4, inset 0 0 0 2px #ead6c4"; b.onclick=()=>{pop(b);speak(n+"! "+nice());tone(640,.12);award("c-"+n)}; el.appendChild(b); });
   },
   numbers(el){
     el.className="nums";
-    for(let n=1;n<=10;n++){ const b=document.createElement("button"); b.className="num"; b.textContent=n; b.onclick=()=>{speak(String(n));tone(200+n*40,.2);award("n-"+n)}; el.appendChild(b); }
+    for(let n=1;n<=10;n++){ const b=document.createElement("button"); b.className="num"; b.textContent=n; b.onclick=()=>{pop(b);speak(String(n));tone(200+n*36,.2);award("n-"+n)}; el.appendChild(b); }
   },
   letters(el){
     el.className="letters";
-    Object.keys(WORDS).forEach(L=>{ const b=document.createElement("button"); b.className="letter"; b.textContent=L; b.onclick=()=>{speak(L+" for "+WORDS[L]);award("l-"+L)}; el.appendChild(b); });
+    Object.keys(WORDS).forEach(L=>{ const b=document.createElement("button"); b.className="letter"; b.textContent=L; b.onclick=()=>{pop(b);speak(L+". "+L+" is for "+WORDS[L]+".");award("l-"+L)}; el.appendChild(b); });
   },
   animals(el){
     el.className="animals";
-    ANIMALS.forEach(([n,s,bg])=>{ const b=document.createElement("button"); b.className="animal"; b.style.background=bg; b.innerHTML=n+"<br><small>"+s+"</small>"; b.onclick=()=>{speak("This is a "+n+". It says "+s+".");award("a-"+n)}; el.appendChild(b); });
+    ANIMALS.forEach(([n,s,bg])=>{ const b=document.createElement("button"); b.className="animal"; b.style.background=bg; b.textContent=n; b.onclick=()=>{pop(b);speak(n+" says "+s+"!");award("a-"+n)}; el.appendChild(b); });
   },
   shapes(el){
     el.className="shapes";
-    SHAPES.forEach(n=>{ const b=document.createElement("button"); b.className="shape"; b.textContent=n; b.onclick=()=>{speak(n);award("s-"+n)}; el.appendChild(b); });
+    SHAPES.forEach(n=>{ const b=document.createElement("button"); b.className="shape"; b.textContent=n; b.onclick=()=>{pop(b);speak(n+"!");award("s-"+n)}; el.appendChild(b); });
   },
   match(el){
     el.className="";
@@ -199,11 +209,11 @@ const builders = {
     let open=[], lock=false;
     function render(){
       wrap.innerHTML="";
-      deck.forEach((c,idx)=>{
+      deck.forEach((c)=>{
         const b=document.createElement("button"); b.className="mcard"+(c.on||c.ok?" on":""); b.textContent=(c.on||c.ok)?c.f:"?";
         b.onclick=()=>{
           if(lock||c.on||c.ok) return; c.on=true; open.push(c); render();
-          if(open.length===2){ lock=true; if(open[0].f===open[1].f){ open[0].ok=open[1].ok=true; award("m-"+open[0].f); speak("match"); open=[]; lock=false; render(); if(deck.every(x=>x.ok)){ store.stars+=3; save(); hello(); speak("You found every pair. Great job!"); toast("All pairs!"); } } else { setTimeout(()=>{ open.forEach(x=>x.on=false); open=[]; lock=false; render(); },700);} }
+          if(open.length===2){ lock=true; if(open[0].f===open[1].f){ open[0].ok=open[1].ok=true; award("m-"+open[0].f); speak("Match! "+nice()); open=[]; lock=false; render(); if(deck.every(x=>x.ok)){ store.stars+=3; save(); hello(); speak("You found every pair! Yay!"); toast("Yay!"); yay(); } } else { setTimeout(()=>{ open.forEach(x=>x.on=false); open=[]; lock=false; render(); },700);} }
         };
         wrap.appendChild(b);
       });
@@ -211,12 +221,12 @@ const builders = {
     render(); el.appendChild(wrap);
     const row=document.createElement("div"); row.className="row";
     const nb=document.createElement("button"); nb.className="btn"; nb.textContent="New cards";
-    nb.onclick=()=>{ deck=FACES.concat(FACES).map((f,i)=>({f,i,on:false,ok:false})).sort(()=>Math.random()-0.5); open=[]; lock=false; render(); };
+    nb.onclick=()=>{ deck=FACES.concat(FACES).map((f,i)=>({f,i,on:false,ok:false})).sort(()=>Math.random()-0.5); open=[]; lock=false; render(); speak("New cards!"); };
     row.appendChild(nb); el.appendChild(row);
   },
   music(el){
     el.className="xylo";
-    NOTES.forEach((f,i)=>{ const b=document.createElement("button"); b.className="bar"; b.style.background=BARS[i]; b.style.height=(56+i*8)+"%"; b.onpointerdown=(e)=>{e.preventDefault();tone(f,.5);award("music");}; el.appendChild(b); });
+    NOTES.forEach((f,i)=>{ const b=document.createElement("button"); b.className="bar"; b.style.background=BARS[i]; b.style.height=(52+i*9)+"%"; b.onpointerdown=(e)=>{e.preventDefault();pop(b);tone(f,.5);award("music");}; el.appendChild(b); });
   },
   draw(el){
     el.className="";
@@ -225,28 +235,32 @@ const builders = {
     CRAY.forEach((c,i)=>{ const b=document.createElement("button"); b.className="crayon"+(i===0?" on":""); b.style.background=c; b.onclick=()=>{color=c; cray.querySelectorAll(".crayon").forEach(x=>x.classList.remove("on")); b.classList.add("on");}; cray.appendChild(b); });
     const canvas=document.createElement("canvas");
     const row=document.createElement("div"); row.className="row";
-    const undo=document.createElement("button"); undo.className="btn ghost"; undo.textContent="Undo";
-    const clear=document.createElement("button"); clear.className="btn"; clear.textContent="Clear";
+    const undo=document.createElement("button"); undo.className="btn ghost"; undo.textContent="Oops";
+    const clear=document.createElement("button"); clear.className="btn"; clear.textContent="All clean";
     el.append(cray,canvas,row); row.append(undo,clear);
     const strokes=[]; let cur=null, draw=false, last=null;
-    function fit(){ const r=canvas.getBoundingClientRect(), d=window.devicePixelRatio||1; canvas.width=r.width*d; canvas.height=r.height*d; const ctx=canvas.getContext("2d"); ctx.setTransform(d,0,0,d,0,0); ctx.lineCap="round"; ctx.lineWidth=12; paint(); }
-    function paint(){ const ctx=canvas.getContext("2d"); const r=canvas.getBoundingClientRect(); ctx.fillStyle="#fffdf9"; ctx.fillRect(0,0,r.width,r.height); ctx.lineCap="round"; ctx.lineWidth=12; strokes.forEach(s=>{ if(s.pts.length<2) return; ctx.strokeStyle=s.c; ctx.beginPath(); ctx.moveTo(s.pts[0][0],s.pts[0][1]); s.pts.slice(1).forEach(p=>ctx.lineTo(p[0],p[1])); ctx.stroke(); }); }
+    function fit(){ const r=canvas.getBoundingClientRect(), d=window.devicePixelRatio||1; canvas.width=r.width*d; canvas.height=r.height*d; const ctx=canvas.getContext("2d"); ctx.setTransform(d,0,0,d,0,0); ctx.lineCap="round"; ctx.lineWidth=16; paint(); }
+    function paint(){ const ctx=canvas.getContext("2d"); const r=canvas.getBoundingClientRect(); ctx.fillStyle="#fffdf9"; ctx.fillRect(0,0,r.width,r.height); ctx.lineCap="round"; ctx.lineWidth=16; strokes.forEach(s=>{ if(s.pts.length<2) return; ctx.strokeStyle=s.c; ctx.beginPath(); ctx.moveTo(s.pts[0][0],s.pts[0][1]); s.pts.slice(1).forEach(p=>ctx.lineTo(p[0],p[1])); ctx.stroke(); }); }
     function pos(e){ const r=canvas.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
     canvas.onpointerdown=(e)=>{ e.preventDefault(); canvas.setPointerCapture(e.pointerId); draw=true; last=pos(e); cur={c:color,pts:[last]}; award("draw"); };
-    canvas.onpointermove=(e)=>{ if(!draw) return; const p=pos(e); const ctx=canvas.getContext("2d"); ctx.strokeStyle=color; ctx.lineWidth=12; ctx.lineCap="round"; ctx.beginPath(); ctx.moveTo(last[0],last[1]); ctx.lineTo(p[0],p[1]); ctx.stroke(); last=p; cur.pts.push(p); };
+    canvas.onpointermove=(e)=>{ if(!draw) return; const p=pos(e); const ctx=canvas.getContext("2d"); ctx.strokeStyle=color; ctx.lineWidth=16; ctx.lineCap="round"; ctx.beginPath(); ctx.moveTo(last[0],last[1]); ctx.lineTo(p[0],p[1]); ctx.stroke(); last=p; cur.pts.push(p); };
     canvas.onpointerup=()=>{ if(cur&&cur.pts.length>1) strokes.push(cur); cur=null; draw=false; };
     undo.onclick=()=>{ strokes.pop(); paint(); };
-    clear.onclick=()=>{ strokes.length=0; paint(); speak("All clean"); };
+    clear.onclick=()=>{ strokes.length=0; paint(); speak("All clean!"); };
     requestAnimationFrame(fit); addEventListener("resize", fit);
   }
 };
 
 document.getElementById("homeBtn").onclick=showHome;
-document.getElementById("setBtn").onclick=()=>{ document.getElementById("sheet").classList.remove("hidden"); document.getElementById("nameIn").value=store.name; document.getElementById("voiceIn").checked=store.voice; };
+let hold=null;
+document.getElementById("mascotBtn").onpointerdown=()=>{ hold=setTimeout(()=>{ document.getElementById("sheet").classList.remove("hidden"); document.getElementById("nameIn").value=store.name; document.getElementById("voiceIn").checked=store.voice; },1800); };
+document.getElementById("mascotBtn").onpointerup=()=>clearTimeout(hold);
+document.getElementById("mascotBtn").onpointerleave=()=>clearTimeout(hold);
 document.getElementById("closeSheet").onclick=()=>{ store.name=document.getElementById("nameIn").value.trim(); store.voice=document.getElementById("voiceIn").checked; save(); hello(); document.getElementById("sheet").classList.add("hidden"); };
 document.getElementById("resetBtn").onclick=()=>{ store.stars=0; store.awarded=[]; save(); hello(); toast("Stars reset"); };
 document.body.addEventListener("pointerdown",()=>{ try{ speechSynthesis.getVoices(); }catch(e){} }, {once:true});
 hello();
+speak("Hi! Tap a picture!");
 </script>
 </body>
 </html>
